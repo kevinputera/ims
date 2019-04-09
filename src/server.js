@@ -35,6 +35,7 @@ async function initDB() {
 // Set up the server
 // GET requests
 app.get("/items", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.getAll("items").then(obj => {
@@ -47,6 +48,7 @@ app.get("/items", (req, res) => {
 });
 
 app.get("/transactions", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.getAll("transactions").then(obj => {
@@ -59,6 +61,7 @@ app.get("/transactions", (req, res) => {
 });
 
 app.get("/customers", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.getAll("customers").then(obj => {
@@ -72,6 +75,7 @@ app.get("/customers", (req, res) => {
 
 // PUT requests
 app.put("/items/add", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.put("items", req.body).then(() => {
@@ -84,6 +88,7 @@ app.put("/items/add", (req, res) => {
 });
 
 app.put("/transactions/add", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.put("transactions", req.body).then(() => {
@@ -96,6 +101,7 @@ app.put("/transactions/add", (req, res) => {
 });
 
 app.put("/customers/add", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.put("customers", req.body).then(() => {
@@ -109,6 +115,7 @@ app.put("/customers/add", (req, res) => {
 
 // DELETE requests
 app.delete("/items/delete", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.delete("items", req.body.itemId).then(() => {
@@ -121,6 +128,7 @@ app.delete("/items/delete", (req, res) => {
 });
 
 app.delete("/transactions/delete", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.delete("items", req.body.transactionId).then(() => {
@@ -133,6 +141,7 @@ app.delete("/transactions/delete", (req, res) => {
 });
 
 app.delete("/customers/delete", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   initDB()
     .then(db => {
       db.delete("items", req.body.customerTaxId).then(() => {
