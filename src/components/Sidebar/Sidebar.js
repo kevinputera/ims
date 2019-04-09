@@ -2,39 +2,31 @@ import React from "react";
 import SidebarContainer from "./SidebarContainer";
 import SidebarMenu from "./SidebarMenu";
 import SidebarButton from "./SidebarButton";
-import SidebarSeparator from "./SidebarSeparator";
+import FormDisplayButton from "./FormDisplayButton";
 
 class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      active: 0
-    };
+  clickedFormDisplayButton = () => {
+    this.props.setDisplayForm(true);
   }
-
-  buttonClick = (e, id) => {
-    this.setState({ active: id });
-    this.props.setDisplayFilterId(id);
-  };
 
   render() {
     let itemList = this.props.list.map((item, index) => (
-      <React.Fragment key={2 * index}>
-        <SidebarButton
-          key={2 * index + 1}
-          index={index}
-          active={this.state.active}
-          onClick={(e, id) => this.buttonClick(e, index)}
-        >
-          {item}
-        </SidebarButton>
-      </React.Fragment>
+      <SidebarButton
+        key={item}
+        index={item}
+        active={this.props.active}
+        onClick={() => this.props.setSidebarSelection(item)}
+      >
+        {item}
+      </SidebarButton>
     ));
 
     return (
       <SidebarContainer>
-        <SidebarMenu>{this.props.title}</SidebarMenu>
+        <SidebarMenu>
+          <span>{this.props.title}</span>
+          <FormDisplayButton onClick={this.clickedFormDisplayButton}/>
+        </SidebarMenu>
         {itemList}
       </SidebarContainer>
     );

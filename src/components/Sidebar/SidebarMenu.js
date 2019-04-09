@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SidebarMenu = styled.div`
-  display: block;
+  display: flex;
 
   margin: 0;
   padding: 10px 16px;
