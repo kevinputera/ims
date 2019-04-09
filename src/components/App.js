@@ -1,36 +1,72 @@
 import React from "react";
+import styled from "styled-components";
 import Global from "./Global";
 import Sidebar from "./Sidebar/Sidebar";
+import Table from "./Table/Table";
+import Form from "./Form/Form";
+
+const AppContainer = styled.div`
+  display: flex;
+
+  width: 100vw;
+  height: 100vh;
+`;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.sidebarList = [
-      "items",
-      "transactions",
-      "customers",
-    ];
-
     this.state = {
-      displayFilterId: 0
+      sidebarSelection: "items",
+      sidebarItems: {
+        items: ["Item ID", "Item Name", "Price", "Quantity"],
+        transactions: [
+          "Transaction ID",
+          "Item Name",
+          "Supplier/Customer",
+          "In",
+          "Out"
+        ],
+        customers: ["Customer Name", "Customer Tax ID"]
+      },
+      sidebarDataDisplayOrder: {
+        items: ["itemId", "itemName", "price", "quantity"],
+        transactions: ["transactionId", "itemName", "person", "in", "out"],
+        customers: ["customerName", "customerTaxId"]
+      },
+      displayForm: false
     };
   }
 
-  setDisplayFilterId = id => {
-    this.setState({ displayFilterId: id });
+  setSidebarSelection = id => {
+    this.setState({ sidebarSelection: id });
+  };
+
+  setDisplayForm = display => {
+    this.setState({ displayForm: display });
   };
 
   render() {
     return (
-      <React.Fragment>
+      <AppContainer>
         <Global />
+        <Form
+          displayForm={this.state.displayForm}
+          setDisplayForm={this.setDisplayForm}
+        />
         <Sidebar
           title="ims"
-          list={this.sidebarList}
-          setDisplayFilterId={this.setDisplayFilterId}
+          list={Object.keys(this.state.sidebarItems)}
+          active={this.state.sidebarSelection}
+          setSidebarSelection={this.setSidebarSelection}
+          setDisplayForm={this.setDisplayForm}
         />
-      </React.Fragment>
+        <Table
+          categoryItems={this.state.sidebarItems}
+          categorySelection={this.state.sidebarSelection}
+          categoryDataDisplayOrder={this.state.sidebarDataDisplayOrder}
+        />
+      </AppContainer>
     );
   }
 }
