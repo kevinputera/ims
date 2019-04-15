@@ -8,7 +8,7 @@ An Inventory Management System built using React with Express back-end in an Ele
 
 - Store data in IndexedDB.
 - The main renderer service(User side) can perform CRUD operations through RESTful HTTP requests to the headless renderer service(server).
-- Sidebar with choice states(able to store the current chosen option in a React state).
+- Sidebar with choice states.
 - Display data in HTML Tables.
 - HTML Forms + Form Validation.
 
