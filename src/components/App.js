@@ -1,16 +1,12 @@
+import config from "../config";
 import React from "react";
-import styled from "styled-components";
 import Global from "./Global";
 import Sidebar from "./Sidebar/Sidebar";
 import Table from "./Table/Table";
-import Form from "./Form/Form";
-
-const AppContainer = styled.div`
-  display: flex;
-
-  width: 100vw;
-  height: 100vh;
-`;
+import Form from "./Forms/Form";
+import AppContainer from "./Structure/AppContainer";
+import Header from "./Structure/Header";
+import Body from "./Structure/Body";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,22 +14,18 @@ class App extends React.Component {
 
     this.state = {
       sidebarSelection: "items",
-      sidebarItems: {
+      sidebarTableItems: {
         items: ["Item ID", "Item Name", "Price", "Quantity"],
         transactions: [
           "Transaction ID",
           "Item Name",
           "Supplier/Customer",
-          "In",
-          "Out"
+          "Buy",
+          "Sell"
         ],
-        customers: ["Customer Name", "Customer Tax ID"]
+        customers: ["Customer Tax ID", "Customer Name"]
       },
-      sidebarDataDisplayOrder: {
-        items: ["itemId", "itemName", "price", "quantity"],
-        transactions: ["transactionId", "itemName", "person", "in", "out"],
-        customers: ["customerName", "customerTaxId"]
-      },
+      tableData: [],
       displayForm: false
     };
   }
@@ -46,25 +38,53 @@ class App extends React.Component {
     this.setState({ displayForm: display });
   };
 
+  setUpdateTableData = update => {
+    this.setState({ updateTableData: update });
+  };
+
+  updateTableData = async () => {
+    // update table data
+    let serverURL = `http://localhost:${config.node_port}/${encodeURIComponent(
+      this.state.sidebarSelection
+    )}`;
+
+    try {
+      let res = await fetch(serverURL);
+
+      if (!res.ok) {
+        throw new Error(`Error ${res.status}: ${res.statusText}`);
+      }
+
+      let tableData = await res.json();
+      this.setState({ tableData: tableData });
+    } catch (err) {
+      alert(`${err.message}. Please try again`);
+    }
+  };
+
   render() {
     return (
       <AppContainer>
         <Global />
+        <Header setDisplayForm={this.setDisplayForm}>ims</Header>
+        <Body>
+          <Sidebar
+            list={Object.keys(this.state.sidebarTableItems)}
+            active={this.state.sidebarSelection}
+            setSidebarSelection={this.setSidebarSelection}
+          />
+          <Table
+            tableData={this.state.tableData}
+            categoryItems={this.state.sidebarTableItems}
+            categorySelection={this.state.sidebarSelection}
+            updateTableData={this.updateTableData}
+          />
+        </Body>
         <Form
           displayForm={this.state.displayForm}
-          setDisplayForm={this.setDisplayForm}
-        />
-        <Sidebar
-          title="ims"
-          list={Object.keys(this.state.sidebarItems)}
-          active={this.state.sidebarSelection}
-          setSidebarSelection={this.setSidebarSelection}
-          setDisplayForm={this.setDisplayForm}
-        />
-        <Table
-          categoryItems={this.state.sidebarItems}
           categorySelection={this.state.sidebarSelection}
-          categoryDataDisplayOrder={this.state.sidebarDataDisplayOrder}
+          setDisplayForm={this.setDisplayForm}
+          updateTableData={this.updateTableData}
         />
       </AppContainer>
     );
