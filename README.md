@@ -1,4 +1,4 @@
-# IMS **Work-in-progress**
+# IMS _Work-in-progress_
 
 An Inventory Management System built using React with Express back-end in an Electron container.
 
