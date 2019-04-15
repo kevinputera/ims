@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
-const ModalOverlay = styled.div`
-  display: ${props => (props.displayForm ? "block" : "none")};
+const Modal = styled.div`
+  display: ${props => (props.displayForm ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
+
   position: fixed;
   z-index: 1;
 
@@ -13,4 +16,4 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export default ModalOverlay;
+export default Modal;
