@@ -1,3 +1,4 @@
+const config = require("./config.js");
 const { app, BrowserWindow } = require("electron");
 const url = require("url");
 const path = require("path");
@@ -18,7 +19,7 @@ app.on("ready", () => {
     url.format({
       protocol: "http",
       hostname: "localhost",
-      port: "3000"
+      port: config.react_port
     })
   );
 
@@ -48,4 +49,7 @@ app.on("ready", () => {
       appWindow = null;
     }
   });
+
+  // appWindow.webContents.toggleDevTools();
+  // serverWindow.webContents.toggleDevTools();
 });
