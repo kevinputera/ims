@@ -1,5 +1,5 @@
 {
-  "name": "ims",
+  "name": "ims-app",
   "version": "0.1.0",
   "main": "src/main.js",
   "author": "Kevin Putera",
@@ -35,6 +35,5 @@
   "devDependencies": {
     "electron": "^4.1.3"
   },
-  "repository": "https://github.com/kevinputera/ims.git",
   "license": "MIT"
 }
