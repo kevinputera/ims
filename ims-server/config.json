@@ -1,0 +1,6 @@
+{
+  "host": "127.0.0.1",
+  "node_port": 8080,
+  "react_port": 3000,
+  "dialect": "mysql"
+}
