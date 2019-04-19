@@ -1,4 +1,4 @@
-import config from "../../config";
+import config from "../../config.json";
 import React from "react";
 import FormContainer from "./FormComponents/FormContainer";
 import FormButton from "./FormComponents/FormButton";
