@@ -1,4 +1,4 @@
-import config from "../config";
+import config from "../config.json";
 import React from "react";
 import Global from "./Global";
 import Sidebar from "./Sidebar/Sidebar";
@@ -18,8 +18,7 @@ class App extends React.Component {
         items: ["Item ID", "Item Name", "Price", "Quantity"],
         transactions: [
           "Transaction ID",
-          "Item Name",
-          "Supplier/Customer",
+          "Item ID",
           "Buy",
           "Sell"
         ],
