@@ -1,4 +1,4 @@
-import config from "../../config.js";
+import config from "../../config.json";
 import React from "react";
 import TableRow from "./TableRow";
 import TableContainer from "./TableContainer";
