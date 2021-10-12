@@ -33,7 +33,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^4.1.3"
+    "electron": "^11.5.0"
   },
   "repository": "https://github.com/kevinputera/ims.git",
   "license": "MIT"
